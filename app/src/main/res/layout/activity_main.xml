@@ -7,7 +7,9 @@
             name="student"
             type="com.example.hp.studentregister.Student">
         </variable>
-
+        <variable
+            name="ClickHandlers"
+            type="com.example.hp.studentregister.MainActivity.MainActivityClickHandlers"></variable>
     </data>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
@@ -37,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:onClick="@{ClickHandlers::onFABButtonClicked}"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </android.support.design.widget.CoordinatorLayout>

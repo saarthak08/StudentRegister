@@ -1,7 +1,9 @@
 package com.example.hp.studentregister;
 
 import android.arch.persistence.room.Room;
+import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,13 +30,16 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Student> students;
     private StudentDataAdapter studentDataAdapter;
     public static final int NEW_STUDENT_ACTIVITY_REQUEST_CODE=1;
+    private ActivityMainBinding activityMainBinding;
+    private MainActivityClickHandlers mainActivityClickHandlers;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        private ActivityMainBinding activityMainBinding;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        activityMainBinding= DataBindingUtil.setContentView(MainActivity.this,R.layout.activity_main);
+        mainActivityClickHandlers=new MainActivityClickHandlers(MainActivity.this);
+        activityMainBinding.setClickHandlers(mainActivityClickHandlers);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -66,19 +71,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(recyclerView);
 
-
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               Intent intent=new Intent(MainActivity.this,AddNewStudentActivity.class);
-               startActivityForResult(intent,NEW_STUDENT_ACTIVITY_REQUEST_CODE);
-            }
-        });
     }
 
+    public class MainActivityClickHandlers{
+        Context context;
+        public MainActivityClickHandlers(Context context)
+        {
+            this.context=context;
+        }
+        public void onFABButtonClicked(View view)
+        {
+            Intent intent=new Intent(MainActivity.this,AddNewStudentActivity.class);
+            startActivityForResult(intent,NEW_STUDENT_ACTIVITY_REQUEST_CODE);
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
