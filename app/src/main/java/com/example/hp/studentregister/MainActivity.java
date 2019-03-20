@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.setClickHandlers(mainActivityClickHandlers);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        RecyclerView recyclerView=findViewById(R.id.rvStudents);
+        RecyclerView recyclerView=activityMainBinding.layoutContentMain.rvStudents;
+       // RecyclerView recyclerView=findViewById(R.id.rvStudents);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
